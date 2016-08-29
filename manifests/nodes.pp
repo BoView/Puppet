@@ -1,10 +1,10 @@
+class base{
+    include chrony,openstack_repository
+}
 node 'controller.openstack.com'{
-    file{"/tmp/t.txt":
-        content=>"hello\nworld\n"
-    }
+    #include base,mysql,rabbitmq,memcached
+    include keystone
 }
 node 'compute.openstack.com'{
-    file{"/tmp/t.txt":
-        content=>"hello\nworld\n"
-    }
+    include base
 }

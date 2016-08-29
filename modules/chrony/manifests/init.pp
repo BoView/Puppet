@@ -1,3 +1,3 @@
 class chrony{
-    include
+    include chrony::install,chrony::config,chrony::service
 }

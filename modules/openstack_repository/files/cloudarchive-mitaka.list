@@ -1,0 +1,2 @@
+deb http://45.55.19.25:81//ubuntu trusty-updates/mitaka main
+# deb-src http://ubuntu-cloud.archive.canonical.com/ubuntu trusty-updates/mitaka main
