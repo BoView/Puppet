@@ -3,8 +3,8 @@ class base{
 }
 node 'controller.openstack.com'{
     #include base
-    #include  mysql,rabbitmq,memcached
-    include keystone
+    #include  mysql,rabbitmq,memcached,keystone
+    include glance
 }
 node 'compute.openstack.com'{
     #include base
