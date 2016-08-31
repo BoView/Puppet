@@ -7,18 +7,18 @@ class mysql::install{
         ["mariadb-server","python-pymysql"]:
         ensure=>present,
     }
-    exec{"update_passwd":
-        command=>"mysql -uroot -e \"set password for root@localhost = password('root');\"",
-        require=>Package["mariadb-server","python-pymysql"],
-        notify=>Exec["use"],
-    }
-    exec{"use":
-        command=>"mysql -uroot -proot -e \"FLUSH PRIVILEGES;\"",
-        require=>Exec["update_passwd"],
-        notify=>Exec["exit"],
-    }
-    exec{"exit":
-        command=>"mysql -uroot -proot -e \"exit\"",
-        require=>Exec["use"],
-    }
+    #exec{"update_passwd":
+    #    command=>"mysql -uroot -e \"set password for root@localhost = password('root');\"",
+    #    require=>Package["mariadb-server","python-pymysql"],
+    #   notify=>Exec["use"],
+    #}
+    #exec{"use":
+    #    command=>"mysql -uroot -proot -e \"FLUSH PRIVILEGES;\"",
+    #    require=>Exec["update_passwd"],
+    #    notify=>Exec["exit"],
+    #}
+    #exec{"exit":
+    #    command=>"mysql -uroot -proot -e \"exit\"",
+    #    require=>Exec["use"],
+    #}
 }
