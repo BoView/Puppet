@@ -5,5 +5,6 @@ class mysql::service{
         hasrestart=>true,
         enable=>true,
         require=>Class["mysql::config"],
+        notify=>Class["rabbitmq"],
     }
 }

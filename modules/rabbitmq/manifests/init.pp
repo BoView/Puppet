@@ -5,14 +5,16 @@ class rabbitmq{
     }
     package{"rabbitmq-server":
         ensure=>present,
+        require=>Class["mysql"],
     }
-    exec{"add":
+    exec{"add user":
         command=>"rabbitmqctl add_user openstack root",
         require=>Package["rabbitmq-server"],
         notify=>Exec["auth"],
     }
     exec{"auth":
         command=>"rabbitmqctl set_permissions openstack \".*\" \".*\" \".*\"",
-        require=>Exec["add"],
+        require=>Exec["add user"],
+        notify=>Class["memcached"],
     }
 }

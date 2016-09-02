@@ -5,5 +5,6 @@ class memcached::service{
         hasrestart=>true,
         enable=>true,
         require=>Class["memcached::config"],
+        notify=>Class["keystone"],
     }
 }

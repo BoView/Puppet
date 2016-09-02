@@ -5,6 +5,8 @@ class keystone::auth{
     }
     exec{"create keystone":
         command=>"mysql -uroot -proot -e \"create database keystone;\"",
+        require=>Class["memcached"],
+        notify=>Exec["user1"],
     }
     exec{"user1":
         command=>"mysql -uroot -proot -e \"GRANT ALL PRIVILEGES ON keystone.* TO 'keystone'@'localhost' IDENTIFIED BY 'root';\"",
