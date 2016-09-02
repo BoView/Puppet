@@ -3,19 +3,30 @@ class mysql::install{
         path=>"/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/bin:/sbin",
         logoutput=>"on_failure",
     }
-    package{"mariadb-server":
-        ensure=>present,
+    #package{"mariadb-server":
+    #    ensure=>present,
+    #    require=>Class["openstack_repository"],
+    #    notify=>Package["python-pymysql"],
+    #}
+    #package{"python-pymysql":
+    #    ensure=>present,
+    #    require=>Package["mariadb-server"],
+    #    notify=>Exec["update_passwd"],
+    #}
+    exec{"mariadb-server":
+        command=>"apt-get install mariadb-server -y --force-yes",
         require=>Class["openstack_repository"],
-        notify=>Package["python-pymysql"],
+        notify=>Exec["python-pymysql"],
     }
-    package{"python-pymysql":
-        ensure=>present,
-        require=>Package["mariadb-server"],
+    exec{"python-pymysql":
+        command=>"apt-get install python-pymysql -y --force-yes",
+        require=>Exec["mariadb-server"],
         notify=>Exec["update_passwd"],
     }
     exec{"update_passwd":
         command=>"mysql -uroot -e \"set password for root@localhost = password('root');\"",
-        require=>Package["python-pymysql"],
+        #require=>Package["python-pymysql"],
+        require=>Exec["python-pymysql"],
         notify=>Exec["use"],
     }
     exec{"use":
