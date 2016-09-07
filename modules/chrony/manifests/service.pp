@@ -5,6 +5,6 @@ class chrony::service{
         hasrestart=>true,
         enable=>true,
         require=>Class["chrony::config"],
-        notify=>Class["openstack_repository"],
+    #    notify=>Class["openstack_repository"],
     }
 }

@@ -1,3 +1,3 @@
 class glance{
-    include glance::auth
+    include glance::mysql,glance::install,glance::config
 }

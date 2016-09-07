@@ -5,7 +5,7 @@ class chrony::config{
     #    require=>Class["chrony::install"],
     #    notify=>Class["chrony::service"],
     #}
-    define file($controller){
+    define file($controller,$compute){
         file{"/etc/chrony/chrony.conf":
             ensure=>present,
             content=>template("chrony/chrony.conf.erb"),
