@@ -11,7 +11,7 @@ class nova::mysql{
     exec{"create nova":
         command=>"mysql -uroot -proot -e \"create database nova;\"",
         require=>Exec["create nova_api"],
-        notify=>Eixec["nova_power1"],
+        notify=>Exec["nova_power1"],
     }
     exec{"nova_power1":
         command=>"mysql -uroot -proot -e \"GRANT ALL PRIVILEGES ON nova_api.* TO 'nova'@'localhost' IDENTIFIED BY 'root';\"",
