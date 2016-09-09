@@ -28,8 +28,8 @@ node 'controller.openstack.com'{
         controller=>"controller",
         passwd=>"root", 
     }
-    include nova_controller
-    nova_controller::config::file{"nova":
+    include nova
+    nova::config::file{"nova":
         ip=>"192.168.1.7",
         controller=>"controller",
         passwd=>"root",
