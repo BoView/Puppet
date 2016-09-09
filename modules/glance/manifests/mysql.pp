@@ -5,7 +5,7 @@ class glance::mysql{
     }
     exec{"create glance":
 	command=>"mysql -uroot -proot -e \"CREATE DATABASE glance;\"",
-    #    require=>Class["keystone"],
+        require=>Class["keystone"],
 	notify=>Exec["power1"],
     }
     exec{"power1":

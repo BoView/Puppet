@@ -27,5 +27,6 @@ class keystone::auth{
         command=>"echo \"manual\" > /etc/init/keystone.override",
         creates=>"/etc/init/keystone.override",
         require=>Exec["update"],
+        notify=>Class["keystone::install"],
     }
 }

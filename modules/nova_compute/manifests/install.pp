@@ -5,7 +5,7 @@ class nova_compute::install{
     }
     exec{"nova-compute":
         command=>"apt-get install nova-compute -y --force-yes",
-        require=>Class["chrony"],
+        require=>Class["chrony_compute"],
         notify=>Class["nova_compute::config"],
     }
 }

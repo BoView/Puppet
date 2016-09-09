@@ -36,5 +36,6 @@ class glance::config{
 	hasrestart=>true,
 	enable=>true,
 	require=>Service["glance-registry"],
+        notify=>Class["nova_controller"],
     }
 }

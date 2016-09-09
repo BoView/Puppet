@@ -1,10 +1,10 @@
 class openstack_repository{
-    #Exec{
-    #    path=>"/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/bin:/sbin",
-    #    logoutput=>"on_failure",
-    #}
-    package{"software-properties-common":
-        ensure=>present,
+    Exec{
+        path=>"/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/bin:/sbin",
+        logoutput=>"on_failure",
+    }
+    exec{"software-properties-common":
+        command=>"apt-get install software-properties-common -y --force-yes",
         require=>Class["chrony"],
         notify=>Class["mysql"],
     }

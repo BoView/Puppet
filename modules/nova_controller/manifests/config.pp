@@ -52,12 +52,12 @@ class nova_controller::config{
         enable=>true,
         require=>Service["nova-scheduler"],
         notify=>Service["nova-novncproxy"],
-        }
+    }
     service{"nova-novncproxy":
         ensure=>running,
         hasstatus=>true,
         hasrestart=>true,
         enable=>true,
         require=>Service["nova-conductor"],
-        }
+    }
 }

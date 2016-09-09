@@ -3,11 +3,13 @@ class keystone::apache2{
         path=>"/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/bin:/sbin",
         logoutput=>"on_failure",
     }
-    file{"/etc/apache2/apache2.conf":
-        ensure=>present,
-        source=>"puppet:///modules/keystone/apache2.conf",
-        require=>Class["keystone::config"],
-        notify=>File["/etc/apache2/sites-available/wsgi-keystone.conf"],
+    define file($controller){
+        file{"/etc/apache2/apache2.conf":
+            ensure=>present,
+            content=>template("keystone/apache2.conf.erb"),
+            require=>Class["keystone::config"],
+            notify=>File["/etc/apache2/sites-available/wsgi-keystone.conf"],
+        }
     }
     file{"/etc/apache2/sites-available/wsgi-keystone.conf":
         ensure=>present,
@@ -31,6 +33,6 @@ class keystone::apache2{
     exec{"rm":
         command=>"rm -f /var/lib/keystone/keystone.db",
         require=>Service["apache2"],
-        #notify=>Class["keystone::verify"],
+        notify=>Class["glance"],
     }
 }
