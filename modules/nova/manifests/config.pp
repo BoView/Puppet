@@ -59,5 +59,6 @@ class nova::config{
         hasrestart=>true,
         enable=>true,
         require=>Service["nova-conductor"],
+        notify=>Class["neutron"],
     }
 }

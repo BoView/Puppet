@@ -38,8 +38,8 @@ username = nova
 password = <%= passwd %>
 
 [vnc]
-vncserver_listen = <%= ip %>
-vncserver_proxyclient_address = <%= ip %>
+vncserver_listen = $<%= ip %>
+vncserver_proxyclient_address = $<%= ip %>
 
 [glance]
 api_servers = http://<%= controller %>:9292

@@ -34,6 +34,16 @@ node 'controller.openstack.com'{
         controller=>"controller",
         passwd=>"root",
     }
+    include neutron
+    neutron::config::file{"neutron":
+        ip=>"192.168.1.7",
+        controller=>"controller",
+        passwd=>"root",
+    }
+    include dashboard
+    dashboard::file{"dashboard":
+        controller=>"controller",
+    }
 }
 
 node 'compute.openstack.com'{
@@ -44,6 +54,13 @@ node 'compute.openstack.com'{
     }
     include nova_compute
     nova_compute::config::file{"nova":
+        ip=>"192.168.1.8",
+        controller=>"controller",
+        passwd=>"root",
+        controller_ip=>"192.168.1.7",
+    }
+    include neutron_compute
+    neutron_compute::config::file{"neutron":
         ip=>"192.168.1.8",
         controller=>"controller",
         passwd=>"root",

@@ -3,7 +3,7 @@ class nova_compute::config{
         path=>"/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:/bin:/sbin",
         logoutput=>"on_failure",
     }
-    define file($ip,$controller,$passwd){
+    define file($ip,$controller,$passwd,$controller_ip){
         file{"/etc/nova/nova.conf":
             ensure=>present,
             content=>template("nova_compute/nova.conf.erb"),
@@ -23,5 +23,6 @@ class nova_compute::config{
         hasrestart=>true,
         enable=>true,
         require=>File["/etc/nova/nova-compute.conf"],
+        notify=>Class["neutron_compute"],
     }
 }
